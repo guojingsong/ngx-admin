@@ -7,6 +7,11 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { JsonFromDemoComponent } from './json-from-demo/json-from-demo.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule, MatToolbarModule } from '@angular/material';
+
+import { JsonSchemaFormModule, MaterialDesignFrameworkModule } from 'angular2-json-schema-form';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -19,7 +24,9 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
-  ],
+    BrowserModule, BrowserAnimationsModule, MatCardModule, MatToolbarModule,
+    MaterialDesignFrameworkModule, JsonSchemaFormModule.forRoot(MaterialDesignFrameworkModule)
+   ],
   declarations: [
     ...PAGES_COMPONENTS,
     JsonFromDemoComponent,
