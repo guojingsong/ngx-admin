@@ -15,6 +15,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { MatCardModule, MatToolbarModule } from '@angular/material';
+import { JsonSchemaFormModule } from './@json-schema-form/json-schema-form.module';
+import { MaterialDesignFrameworkModule } from './@json-schema-form/framework-library/material-design-framework/material-design-framework.module';
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,7 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-
+    BrowserModule, BrowserAnimationsModule, MatCardModule, MatToolbarModule,
+    MaterialDesignFrameworkModule, JsonSchemaFormModule.forRoot(MaterialDesignFrameworkModule),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),

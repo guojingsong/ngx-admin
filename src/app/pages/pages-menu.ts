@@ -2,11 +2,100 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'E-JSON-EDIT',
-    icon: 'nb-flame-circled',
-    link: '/pages/json-from-demo',
-    home: true,
+    title: '功能展示',
+    group: true,
   },  
+  {
+    title: 'JsonEdit画面(新)',
+    icon: 'nb-keypad',
+    children: [
+      {
+        title: '项目辞书',
+        link: '/pages/json-from-demo',
+      },
+      {
+        title: '内部IF',
+        link: '/pages/json-from-demo',
+      },
+      {
+        title: '画面设计',
+        link: '/pages/json-from-demo',
+      },  
+      {
+        title: '外部IF',
+        link: '/pages/json-from-demo',
+      },
+    ],
+  }, 
+  {
+    title: 'JsonEdit画面(旧)',
+    icon: 'nb-compose',
+    children: [
+      {
+        title: '项目辞书',
+        link: '/pages/json-from-demo',
+      },
+      {
+        title: '内部IF',
+        link: '/pages/json-from-demo',
+      },
+      {
+        title: '画面设计',
+        link: '/pages/json-from-demo',
+      },  
+      {
+        title: '外部IF',
+        link: '/pages/json-from-demo',
+      },           
+    ],
+  }, 
+  {
+    title: '分析图表',
+    icon: 'nb-bar-chart',
+    children: [
+      {
+        title: 'Echarts',
+        link: '/pages/charts/echarts',
+      },
+      {
+        title: 'Charts.js',
+        link: '/pages/charts/chartjs',
+      },
+      {
+        title: 'D3',
+        link: '/pages/charts/d3',
+      },
+      {
+        title: 'G6',
+        link: '/pages/g6-from-demo',
+      },      
+    ],
+  },  
+  {
+    title: '数据表格',
+    icon: 'nb-tables',
+    children: [
+      {
+        title: 'Smart Table',
+        link: '/pages/tables/smart-table',
+      },
+    ],
+  },  
+  {
+    title: '简单入力',
+    icon: 'nb-title',
+    children: [
+      {
+        title: 'TinyMCE',
+        link: '/pages/editors/tinymce',
+      },
+      {
+        title: 'CKEditor',
+        link: '/pages/editors/ckeditor',
+      },
+    ],
+  },   
+ /*
   {
     title: 'E-commerce',
     icon: 'nb-e-commerce',
@@ -17,8 +106,56 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-home',
     link: '/pages/iot-dashboard',
   },
+  */
   {
-    title: 'FEATURES',
+    title: '画面展示',
+    group: true,
+  },
+  {
+    title: '标准画面',
+    icon: 'nb-locked',
+    children: [
+      {
+        title: '基本入力',
+        link: '/pages/json-from-demo',
+      },      
+      {
+        title: '登录管理',
+        link: '/auth/login',
+      },
+      {
+        title: '注册管理',
+        link: '/auth/register',
+      },
+      {
+        title: '密码管理',
+        link: '/auth/request-password',
+      },
+      {
+        title: '恢复密码',
+        link: '/auth/reset-password',
+      },
+    ],
+  },
+ 
+  {
+    title: '自定设计',
+    group: true,
+  }, 
+  {
+    title: '设计管理',
+    icon: 'nb-locked',
+    children: [
+      {
+        title: '基本入力',
+        link: '/pages/json-from-demo',
+      },      
+    ],
+  },   
+ 
+/*
+  {
+    title: '设计管理',
     group: true,
   },
   {
@@ -183,4 +320,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+*/
 ];

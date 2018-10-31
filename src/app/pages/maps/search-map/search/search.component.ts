@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { Location } from '../entity/Location';
-import {} from 'googlemaps';
+//import {} from 'googlemaps';
 
 @Component({
   selector: 'ngx-search',
@@ -19,6 +19,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*
     // load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
@@ -40,5 +41,6 @@ export class SearchComponent implements OnInit {
         });
       });
     });
+    */
   }
 }
