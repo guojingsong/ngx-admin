@@ -1,3 +1,5 @@
+@import '~handsontable/dist/handsontable.full.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 // themes - our custom or/and out of the box themes
 @import 'themes';
 
@@ -5,6 +7,7 @@
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/auth/styles/all';
 @import '~@nebular/bootstrap/styles/globals';
+
 // ...
 
 // global app font size

@@ -76,6 +76,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-tables',
     children: [
       {
+        title: 'Handson Table',
+        link: '/pages/tables/handson-table',
+      },      
+      {
         title: 'Smart Table',
         link: '/pages/tables/smart-table',
       },

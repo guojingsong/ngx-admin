@@ -1,0 +1,156 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_global\node_modules\yarn\bin\yarn.js add handsontable
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\;C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\;;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_102\bin;C:\Program Files\Java\jdk1.8.0_102\jre\bin;C:\soft\apache-tomcat-9.0.0.M9\lib;C:\soft\apache-tomcat-9.0.0.M9\bin;C:\soft\apache-maven-3.5.0\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files (x86)\Turbo\Cmd\;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\nodejs\;C:\Program Files\nodejs\node_global;;C:\Program Files\Microsoft VS Code\bin;C:\Python27;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\;C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\Java\jdk1.8.0_102\bin;C:\Program Files\Java\jdk1.8.0_102\jre\bin;C:\soft\apache-tomcat-9.0.0.M9\lib;C:\soft\apache-tomcat-9.0.0.M9\bin;C:\soft\apache-maven-3.5.0\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files (x86)\Turbo\Cmd\;C:\Users\Administrator\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Spoon\Cmd;C
+
+Yarn version: 
+  1.10.1
+
+Node version: 
+  8.11.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EBUSY: resource busy or locked, unlink 'e:\GitHub\ngx-admin\node_modules\electron\dist\content_resources_200_percent.pak'
+
+npm manifest: 
+  {
+    "name": "ngx-admin",
+    "version": "2.3.0",
+    "main": "Emain.js",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/akveo/ngx-admin.git"
+    },
+    "bugs": {
+      "url": "https://github.com/akveo/ngx-admin/issues"
+    },
+    "browserslist": [
+      "> 1%",
+      "last 2 versions",
+      "IE 11"
+    ],
+    "scripts": {
+      "ng": "ng",
+      "conventional-changelog": "conventional-changelog",
+      "start-web": "ng serve",
+      "build": "ng build --watch",
+      "build:prod": "npm run build -- --prod --aot",
+      "test": "ng test",
+      "test:coverage": "rimraf coverage && npm run test -- --code-coverage",
+      "lint": "ng lint",
+      "lint:fix": "ng lint ngx-admin-demo --fix",
+      "lint:styles": "stylelint ./src/**/*.scss",
+      "lint:ci": "npm run lint && npm run lint:styles",
+      "pree2e": "webdriver-manager update --standalone false --gecko false",
+      "e2e": "ng e2e",
+      "docs": "compodoc -p src/tsconfig.app.json -d docs",
+      "docs:serve": "compodoc -p src/tsconfig.app.json -d docs -s",
+      "prepush": "npm run lint:ci",
+      "release:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
+      "build-electron": "copy src\\electron\\* dist",
+      "electron": "electron ./dist",
+      "start": "npm run build-electron && npm run electron"
+    },
+    "dependencies": {
+      "@agm/core": "1.0.0-beta.2",
+      "@angular/animations": "^7.0.0",
+      "@angular/cdk": "7.0.1",
+      "@angular/cli": "^7.0.2",
+      "@angular/common": "7.0.0",
+      "@angular/compiler": "^7.0.0",
+      "@angular/compiler-cli": "^7.0.0",
+      "@angular/core": "7.0.0",
+      "@angular/flex-layout": "7.0.0-beta.19",
+      "@angular/forms": "^7.0.0",
+      "@angular/http": "^7.0.0",
+      "@angular/language-service": "^7.0.0",
+      "@angular/material": "^7.0.1",
+      "@angular/platform-browser": "^7.0.0",
+      "@angular/platform-browser-dynamic": "^7.0.0",
+      "ajv": "^6.0.1",
+      "lodash": "4.x",
+      "@angular/router": "7.0.0",
+      "@asymmetrik/ngx-leaflet": "3.0.1",
+      "@nebular/auth": "2.0.1",
+      "@nebular/bootstrap": "2.0.1",
+      "@nebular/security": "2.0.1",
+      "@nebular/theme": "2.0.1",
+      "@ng-bootstrap/ng-bootstrap": "1.0.0",
+      "@swimlane/ngx-charts": "7.0.1",
+      "angular-tree-component": "7.2.0",
+      "angular2-chartjs": "0.4.1",
+      "angular2-toaster": "6.1.0",
+      "bootstrap": "4.0.0",
+      "chart.js": "2.7.1",
+      "ckeditor": "4.7.3",
+      "classlist.js": "1.1.20150312",
+      "core-js": "2.5.1",
+      "echarts": "^4.0.2",
+      "electron": "^3.0.4",
+      "intl": "1.2.5",
+      "ionicons": "2.0.1",
+      "leaflet": "1.2.0",
+      "nebular-icons": "1.0.9",
+      "ng2-ckeditor": "1.1.13",
+      "ng2-completer": "2.0.8",
+      "ng2-smart-table": "1.3.5",
+      "ngx-echarts": "2.0.1",
+      "normalize.css": "6.0.0",
+      "pace-js": "1.0.2",
+      "path": "^0.12.7",
+      "roboto-fontface": "0.8.0",
+      "rxjs": "^6.3.3",
+      "rxjs-compat": "^6.3.3",
+      "socicon": "3.0.5",
+      "tinymce": "4.5.7",
+      "typeface-exo": "0.0.22",
+      "url": "^0.11.0",
+      "web-animations-js": "2.2.5",
+      "zone.js": "^0.8.26"
+    },
+    "devDependencies": {
+      "@angular-devkit/build-angular": "~0.10.0",
+      "@angular/cli": "7.0.0",
+      "@angular/compiler-cli": "7.0.0",
+      "@angular/language-service": "7.0.0",
+      "@compodoc/compodoc": "1.0.1",
+      "@fortawesome/fontawesome-free": "^5.2.0",
+      "@types/d3-color": "1.0.5",
+      "@types/googlemaps": "3.30.4",
+      "@types/jasmine": "2.5.54",
+      "@types/jasminewd2": "2.0.3",
+      "@types/leaflet": "1.2.3",
+      "@types/node": "6.0.90",
+      "codelyzer": "^4.1.0",
+      "conventional-changelog-cli": "1.3.4",
+      "husky": "0.13.3",
+      "jasmine-core": "2.6.4",
+      "jasmine-spec-reporter": "4.1.1",
+      "karma": "1.7.1",
+      "karma-chrome-launcher": "2.1.1",
+      "karma-cli": "1.0.1",
+      "karma-coverage-istanbul-reporter": "1.3.0",
+      "karma-jasmine": "1.1.0",
+      "karma-jasmine-html-reporter": "0.2.2",
+      "npm-run-all": "4.0.2",
+      "protractor": "5.1.2",
+      "rimraf": "2.6.1",
+      "stylelint": "7.13.0",
+      "ts-node": "3.2.2",
+      "tslint": "5.7.0",
+      "tslint-language-service": "0.9.6",
+      "typescript": "~3.1.3"
+  
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
