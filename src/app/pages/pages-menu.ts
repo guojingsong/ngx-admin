@@ -11,11 +11,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '项目辞书',
-        link: '/pages/json-from-demo',
+        link: '/pages/angular-schema-from/dictionary',
       },
       {
         title: '内部IF',
-        link: '/pages/json-from-demo',
+        link: '/pages/angular-schema-from/edit',
       },
       {
         title: '画面设计',
@@ -33,11 +33,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '项目辞书',
-        link: '/pages/json-from-demo',
+        link: '/pages/angular-schema-from/dictionary',
       },
       {
         title: '内部IF',
-        link: '/pages/json-from-demo',
+        link: '/pages/angular-schema-from/edit',
       },
       {
         title: '画面设计',

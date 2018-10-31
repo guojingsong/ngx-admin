@@ -45,6 +45,9 @@ const routes: Routes = [{
     path: 'tables',
     loadChildren: './tables/tables.module#TablesModule',
   }, {
+    path: 'angular-schema-from',
+    loadChildren: './angular-schema-from/angular-schema-from.module#AngularSchemaFromModule',
+  }, {    
     path: 'miscellaneous',
     loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
   }, {
