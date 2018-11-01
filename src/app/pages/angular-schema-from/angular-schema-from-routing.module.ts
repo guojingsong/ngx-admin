@@ -11,21 +11,20 @@ const routes: Routes = [{
   children: [{
     path: 'dictionary',
     component: DictionaryComponent,
-  },
-  {
+  }, {
     path: 'edit',
     component: EditComponent,
-  },  
-  ],
+  },],
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TablesRoutingModule { }
+export class AngularSchemaRoutingModule { }
 
 export const routedComponents = [
+  AngularSchemaFromComponent,
   DictionaryComponent,
   EditComponent,
 ];

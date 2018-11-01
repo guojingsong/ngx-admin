@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
-import { JsonFromDemoComponent } from './json-from-demo/json-from-demo.component';
 import { G6FromDemoComponent } from './g6-from-demo/g6-from-demo.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 
@@ -14,9 +13,6 @@ const routes: Routes = [{
   children: [{
     path: 'dashboard',
     component: ECommerceComponent,
-  },{
-    path: 'json-from-demo',
-    component: JsonFromDemoComponent,
   },{
     path: 'g6-from-demo',
     component: G6FromDemoComponent,
@@ -42,11 +38,14 @@ const routes: Routes = [{
     path: 'forms',
     loadChildren: './forms/forms.module#FormsModule',
   }, {
-    path: 'tables',
-    loadChildren: './tables/tables.module#TablesModule',
+    path: 'scheamforms',
+    loadChildren: './scheamforms/scheam-forms.module#ScheamFormsModule',    
   }, {
     path: 'angular-schema-from',
     loadChildren: './angular-schema-from/angular-schema-from.module#AngularSchemaFromModule',
+  }, {
+    path: 'tables',
+    loadChildren: './tables/tables.module#TablesModule',
   }, {    
     path: 'miscellaneous',
     loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',

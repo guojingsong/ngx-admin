@@ -1,19 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ngx-json-from-demo',
-  templateUrl: './json-from-demo.component.html',
-  styleUrls: ['./json-from-demo.component.scss']
+  selector: 'ngx-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss']
 })
-export class JsonFromDemoComponent implements OnInit {
+export class EditComponent implements OnInit {
 
-  starRate = 2;
-  heartRate = 4;
-  
   constructor() { }
-
-  ngOnInit() {
-  }
 
   exampleSchema = {
     'type': 'object',
@@ -69,10 +63,13 @@ export class JsonFromDemoComponent implements OnInit {
     ], 'notes': ''
   };
 
+  
+  ngOnInit() {
+  }
+
   displayData: any = null;
 
   exampleOnSubmitFn(formData) {
     this.displayData = formData;
   }
-
 }

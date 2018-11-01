@@ -11,20 +11,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '项目辞书',
-        link: '/pages/angular-schema-from/dictionary',
+        link: '/pages/scheamforms/edit',
       },
       {
         title: '内部IF',
-        link: '/pages/angular-schema-from/edit',
+        link: '/pages/scheamforms/edit',
       },
       {
         title: '画面设计',
-        link: '/pages/json-from-demo',
+        link: '/pages/scheamforms/edit',
       },  
       {
         title: '外部IF',
-        link: '/pages/json-from-demo',
+        link: '/pages/scheamforms/edit',
       },
+      {
+        title: '机能设计',
+        link: '/pages/scheamforms/edit',
+      },      
     ],
   }, 
   {
@@ -33,20 +37,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '项目辞书',
-        link: '/pages/angular-schema-from/dictionary',
+        link: '/pages/scheamforms/edit',
       },
       {
         title: '内部IF',
-        link: '/pages/angular-schema-from/edit',
+        link: '/pages/scheamforms/edit',
       },
       {
-        title: '画面设计',
-        link: '/pages/json-from-demo',
-      },  
-      {
-        title: '外部IF',
-        link: '/pages/json-from-demo',
-      },           
+        title: '机能设计',
+        link: '/pages/scheamforms/edit',
+      },                  
     ],
   }, 
   {
