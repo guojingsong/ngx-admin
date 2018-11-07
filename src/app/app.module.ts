@@ -28,7 +28,6 @@ import { MaterialDesignFrameworkModule } from './@json-schema-form/framework-lib
     HttpClientModule,
     AppRoutingModule,
     BrowserModule, BrowserAnimationsModule, MatCardModule, MatToolbarModule,
-    MaterialDesignFrameworkModule, JsonSchemaFormModule.forRoot(MaterialDesignFrameworkModule),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
