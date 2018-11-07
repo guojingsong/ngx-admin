@@ -7,13 +7,13 @@ import { WidgetLibraryModule } from './widget-library/widget-library.module';
 import { WidgetLibraryService } from './widget-library/widget-library.service';
 
 import { JsonSchemaFormComponent } from './json-schema-form.component';
-
 import { JsonSchemaFormService } from './json-schema-form.service';
 
-import { NoFrameworkComponent } from './framework-library/no-framework/no-framework.component';
+
 import { Framework } from './framework-library/framework';
 import { NoFramework } from './framework-library/no-framework/no.framework';
 import { NoFrameworkModule } from './framework-library/no-framework/no-framework.module';
+import { NoFrameworkComponent } from './framework-library/no-framework/no-framework.component';
 
 @NgModule({
   imports: [

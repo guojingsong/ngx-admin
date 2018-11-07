@@ -305,21 +305,21 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
 
       // Uncomment individual lines to output debugging information to console:
       // (These always work.)
-      // console.log('loading form...');
-      // console.log('schema', this.jsf.schema);
-      // console.log('layout', this.jsf.layout);
-      // console.log('options', this.options);
-      // console.log('formValues', this.jsf.formValues);
-      // console.log('formGroupTemplate', this.jsf.formGroupTemplate);
-      // console.log('formGroup', this.jsf.formGroup);
-      // console.log('formGroup.value', this.jsf.formGroup.value);
-      // console.log('schemaRefLibrary', this.jsf.schemaRefLibrary);
-      // console.log('layoutRefLibrary', this.jsf.layoutRefLibrary);
-      // console.log('templateRefLibrary', this.jsf.templateRefLibrary);
-      // console.log('dataMap', this.jsf.dataMap);
-      // console.log('arrayMap', this.jsf.arrayMap);
-      // console.log('schemaRecursiveRefMap', this.jsf.schemaRecursiveRefMap);
-      // console.log('dataRecursiveRefMap', this.jsf.dataRecursiveRefMap);
+       console.log('loading form...');
+       console.log('schema', this.jsf.schema);
+       console.log('layout', this.jsf.layout);
+       console.log('options', this.options);
+       console.log('formValues', this.jsf.formValues);
+       console.log('formGroupTemplate', this.jsf.formGroupTemplate);
+       console.log('formGroup', this.jsf.formGroup);
+       console.log('formGroup.value', this.jsf.formGroup.value);
+       console.log('schemaRefLibrary', this.jsf.schemaRefLibrary);
+       console.log('layoutRefLibrary', this.jsf.layoutRefLibrary);
+       console.log('templateRefLibrary', this.jsf.templateRefLibrary);
+       console.log('dataMap', this.jsf.dataMap);
+       console.log('arrayMap', this.jsf.arrayMap);
+       console.log('schemaRecursiveRefMap', this.jsf.schemaRecursiveRefMap);
+       console.log('dataRecursiveRefMap', this.jsf.dataRecursiveRefMap);
 
       // Uncomment individual lines to output debugging information to browser:
       // (These only work if the 'debug' option has also been set to 'true'.)
@@ -565,6 +565,7 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
     };
 
     // Check for layout inputs and, if found, initialize form layout
+    // 检查布局输入，如果发现，初始化表单布局
     if (isArray(this.layout)) {
       this.jsf.layout = _.cloneDeep(this.layout);
     } else if (isArray(this.form)) {
@@ -580,6 +581,7 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
     }
 
     // Check for alternate layout inputs
+    // 检查备用布局输入
     let alternateLayout: any = null;
     if (isObject(this.UISchema)) {
       this.jsf.ReactJsonSchemaFormCompatibility = true;
@@ -596,6 +598,7 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
     }
 
     // if alternate layout found, copy alternate layout options into schema
+    // 如果找到替代布局，则将备用布局选项复制到模式中。
     if (alternateLayout) {
       JsonPointer.forEachDeep(alternateLayout, (value, pointer) => {
         const schemaPointer = pointer
@@ -607,12 +610,11 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
           const groupPointer = (JsonPointer.parse(schemaPointer) || []).slice(0, -2);
           let itemPointer: string | string[];
 
-          // If 'ui:order' object found, copy into object schema root
+          // If 'ui:order' 对象，复制到对象schema根目录中
           if (key.toLowerCase() === 'ui:order') {
             itemPointer = [...groupPointer, 'ui:order'];
-
-          // Copy other alternate layout options to schema 'x-schema-form',
-          // (like Angular Schema Form options) and remove any 'ui:' prefixes
+          // 将其他替代布局选项复制到模式 'x-schema-form',
+          // (类似Angular模式表单选项) and remove any 'ui:' prefixes
           } else {
             if (key.slice(0, 3).toLowerCase() === 'ui:') { key = key.slice(3); }
             itemPointer = [...groupPointer, 'x-schema-form', key];
