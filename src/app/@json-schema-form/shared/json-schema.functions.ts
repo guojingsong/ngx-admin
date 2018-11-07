@@ -561,7 +561,7 @@ export function getControlValidators(schema) {
 
 /**
  * 'resolveSchemaReferences' function
- *
+ * *在架构中查找所有的REF链接，并保存链接和引用的模式
  * Find all $ref links in schema and save links and referenced schemas in
  * schemaRefLibrary, schemaRecursiveRefMap, and dataRecursiveRefMap
  *
