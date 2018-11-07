@@ -11,7 +11,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '项目辞书',
-        link: '/pages/scheamforms/edit',
+        link: '/pages/scheamforms/dictionary',
       },
       {
         title: '内部IF',
@@ -156,12 +156,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },      
     ],
   },   
- 
-/*
-  {
-    title: '设计管理',
-    group: true,
-  },
   {
     title: 'UI Features',
     icon: 'nb-keypad',
@@ -215,6 +209,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+/*
+  {
+    title: '设计管理',
+    group: true,
+  },
+
   {
     title: 'Components',
     icon: 'nb-gear',
