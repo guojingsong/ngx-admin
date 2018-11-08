@@ -11,3 +11,6 @@ export { Bootstrap3FrameworkModule } from './bootstrap-3-framework/bootstrap-3-f
 
 export { Bootstrap4Framework } from './bootstrap-4-framework/bootstrap-4.framework';
 export { Bootstrap4FrameworkModule } from './bootstrap-4-framework/bootstrap-4-framework.module';
+
+export { NebularDesignFramework } from './nebular-design-framework/nebular-design.framework';
+export { NebularDesignFrameworkModule } from './nebular-design-framework/nebular-design-framework.module';

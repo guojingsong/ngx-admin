@@ -15,13 +15,15 @@ import { NoFramework } from './framework-library/no-framework/no.framework';
 import { NoFrameworkModule } from './framework-library/no-framework/no-framework.module';
 import { NoFrameworkComponent } from './framework-library/no-framework/no-framework.component';
 
+import { Ng2SmartTableModule} from '../@ng2-smart-table';
+
 @NgModule({
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
     WidgetLibraryModule, NoFrameworkModule
   ],
   declarations: [ JsonSchemaFormComponent ],
-  exports: [ JsonSchemaFormComponent, WidgetLibraryModule ]
+  exports: [ JsonSchemaFormComponent, WidgetLibraryModule ,Ng2SmartTableModule]
 })
 export class JsonSchemaFormModule {
   static forRoot(...frameworks): ModuleWithProviders {
