@@ -5,7 +5,7 @@ import {
 
 /**
  * Utility function library:
- *
+ * 用函数库
  * addClasses, copy, forEach, forEachCopy, hasOwn, mergeFilteredObject,
  * uniqueItems, commonItems, fixTitle, toTitleCase
 */
@@ -14,6 +14,7 @@ import {
  * 'addClasses' function
  *
  * Merges two space-delimited lists of CSS classes and removes duplicates.
+ * 合并两个空间分隔的CSS类列表并移除重复项。
  *
  * @param {string | string[] | Set<string>} oldClasses
  * @param {string | string[] | Set<string>} newClasses
@@ -41,6 +42,8 @@ export function addClasses(
  * Makes a shallow copy of a JavaScript object, array, Map, or Set.
  * If passed a JavaScript primitive value (string, number, boolean, or null),
  * it returns the value.
+ * 制作一个JavaScript对象、数组、映射或集合的浅拷贝。
+ * 如果传递了JavaScript原始值（字符串、数字、布尔或null），它返回值。
  *
  * @param {Object|Array|string|number|boolean|null} object - The object to copy
  * @param {boolean = false} errors - Show errors?
@@ -63,7 +66,6 @@ export function copy(object: any, errors = false): any {
  *
  * Iterates over all items in the first level of an object or array
  * and calls an iterator funciton on each item.
- * 遍历对象或数组的第一级中的所有项并在每个项上调用迭代器函数。
  * 
  * The iterator function is called with four values:
  * 1. The current item's value
@@ -74,6 +76,30 @@ export function copy(object: any, errors = false): any {
  * Setting the optional third parameter to 'top-down' or 'bottom-up' will cause
  * it to also recursively iterate over items in sub-objects or sub-arrays in the
  * specified direction.
+ 
+ * Iterates over all items in the first level of an object or array
+ * and calls an iterator funciton on each item.
+ * 
+ * The iterator function is called with four values:
+ * 1. The current item's value
+ * 2. The current item's key
+ * 3. The parent object, which contains the current item
+ * 4. The root object
+ *
+ * Setting the optional third parameter to 'top-down' or 'bottom-up' will cause
+ * it to also recursively iterate over items in sub-objects or sub-arrays in the
+ * specified direction.
+ * 遍历对象或数组的第一级中的所有项并在每个项上调用迭代器函数。
+ *
+ * 迭代器函数用四个值调用：
+ * 1。当前项目的价值
+ * 2。当前项目的关键
+ * 3。包含当前项的父对象
+ * 4。根对象
+ *
+ * 将可选的第三参数设置为“自上而下”或“自下而上”将导致它还递归地遍历子对象或子数组中的项。
+ * 指定的方向
+
  *
  * @param {Object|Array} object - The object or array to iterate over
  * @param {function} fn - the iterator funciton to call on each item
@@ -118,6 +144,9 @@ export function forEach(
  * of the iterator function.
  *
  * Does NOT recursively iterate over items in sub-objects or sub-arrays.
+ * 遍历对象或数组的第一级中的所有项并在每个项上调用迭代器函数。返回新的对象或数组
+ * 具有与原始相同的键或索引，以及设置到结果的值迭代器函数。
+ * 不递归地遍历子对象或子数组中的项。
  *
  * @param {Object | Array} object - The object or array to iterate over
  * @param {function} fn - The iterator funciton to call on each item
@@ -152,6 +181,7 @@ export function forEachCopy(
  * 'hasOwn' utility function
  *
  * Checks whether an object or array has a particular property.
+ * 检查对象或数组是否具有特定属性。
  *
  * @param {any} object - the object to check
  * @param {string} property - the property to look for
@@ -178,6 +208,10 @@ export function hasOwn(object: any, property: string): boolean {
  * Optionally, it can also use functions to transform the key names and/or
  * the values of the merging object.
  *
+ * MyGeFrimeDead对象的效用函数
+ * 合并两个对象，从源对象设置关键字和值在目标对象中，排除指定的键。
+ * 可选地，它还可以使用函数来转换密钥名称和/或*合并对象的值。
+ * 
  * @param {PlainObject} targetObject - Target object to add keys and values to
  * @param {PlainObject} sourceObject - Source object to copy keys and values from
  * @param {string[]} excludeKeys - Array of keys to exclude
@@ -207,6 +241,8 @@ export function mergeFilteredObject(
  *
  * Accepts any number of string value inputs,
  * and returns an array of all input vaues, excluding duplicates.
+ * 接受任何字符串值输入，
+ * 并返回所有输入VAUES的数组，不包括重复项。
  *
  * @param {...string} ...items -
  * @return {string[]} -
@@ -224,6 +260,8 @@ export function uniqueItems(...items): string[] {
  *
  * Accepts any number of strings or arrays of string values,
  * and returns a single array containing only values present in all inputs.
+ * 接受任何字符串或数组的字符串值，
+ * 并返回仅包含所有输入中的值的单个数组。
  *
  * @param {...string|string[]} ...arrays -
  * @return {string[]} -
@@ -259,6 +297,11 @@ export function fixTitle(name: string): string {
  * words and abbreviations to force into a particular case.
  *
  * This function is built on prior work by John Gruber and David Gouch:
+ * 
+ * 智能地将输入字符串转换为标题实例。
+ * 接受一个可选的第二个参数和一个附加的列表
+ * 单词和缩略语以强迫进入特定的情况。
+ * 这个函数建立在John Gruber和David Gouch的前期工作上：
  * http://daringfireball.net/2008/08/title_case_update
  * https://github.com/gouch/to-title-case
  *

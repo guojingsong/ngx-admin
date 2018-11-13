@@ -9,6 +9,7 @@ import { hasOwn, copy } from './utility.functions';
  * 'JsonPointer' class
  *
  * Some utilities for using JSON Pointers with JSON objects
+ * 使用JSON对象使用JSON指针的一些实用工具
  * https://tools.ietf.org/html/rfc6901
  *
  * get, getCopy, getFirst, set, setCopy, insert, insertCopy, remove, has, dict,
@@ -28,6 +29,7 @@ export class JsonPointer {
    * 'get' function
    *
    * Uses a JSON Pointer to retrieve a value from an object.
+   * 使用JSON指针从对象中检索值。
    *
    * @param  { object } object - Object to get value from
    * @param  { Pointer } pointer - JSON Pointer (string or array)
@@ -84,7 +86,7 @@ export class JsonPointer {
    * 'getCopy' function
    *
    * Uses a JSON Pointer to deeply clone a value from an object.
-   *
+   * 使用JSON指针深度克隆对象的值。
    * @param  { object } object - Object to get value from
    * @param  { Pointer } pointer - JSON Pointer (string or array)
    * @param  { number = 0 } startSlice - Zero-based index of first Pointer key to use
@@ -108,6 +110,9 @@ export class JsonPointer {
    * Takes an array of JSON Pointers and objects,
    * checks each object for a value specified by the pointer,
    * and returns the first value found.
+   * 接受一组JSON指针和对象，
+   * 为每个对象检查指针所指定的值，
+   * 并返回找到的第一个值。
    *
    * @param  { [object, pointer][] } items - Array of objects and pointers to check
    * @param  { any = null } defaultValue - Value to return if nothing found
@@ -152,7 +157,7 @@ export class JsonPointer {
    * 'getFirstCopy' function
    *
    * Similar to getFirst, but always returns a copy.
-   *
+   * 与GETBASE相似，但总是返回一个副本。
    * @param  { [object, pointer][] } items - Array of objects and pointers to check
    * @param  { any = null } defaultValue - Value to return if nothing found
    * @return { any } - Copy of first value found
@@ -491,12 +496,12 @@ export class JsonPointer {
 
   /**
    * 'compile' function
-   *
+   * 将键数组转换为JSON指针字符串
    * Converts an array of keys into a JSON Pointer string
    * (if input is already a string, it is normalized and returned)
-   *
+   * （如果输入已经是字符串，则将其归一化并返回）
    * The optional second parameter is a default which will replace any empty keys.
-   *
+   * 可选的第二个参数是默认的，它将替换任何空的键。
    * @param  { Pointer } pointer - JSON Pointer (string or array)
    * @param  { string | number = '' } defaultValue - Default value
    * @param  { boolean = false } errors - Show error if invalid pointer?
@@ -540,8 +545,11 @@ export class JsonPointer {
    * 'isJsonPointer' function
    *
    * Checks a string or array value to determine if it is a valid JSON Pointer.
+   * 检查字符串或数组值，以确定它是否是有效的JSON指针。
    * Returns true if a string is empty, or starts with '/' or '#/'.
+   * 如果字符串为空，则返回true，或以
    * Returns true if an array contains only string values.
+   * 如果数组仅包含字符串值，则返回true。
    *
    * @param  { any } value - value to check
    * @return { boolean } - true if value is a valid JSON Pointer, otherwise false

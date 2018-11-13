@@ -116,6 +116,7 @@ export function buildSchemaFromData(
  * 'getFromSchema' function
  *
  * Uses a JSON Pointer for a value within a data object to retrieve
+ * 使用JSON指针对数据对象内的值进行检索
  * the schema for that value within schema for the data object.
  *
  * The optional third parameter can also be set to return something else:

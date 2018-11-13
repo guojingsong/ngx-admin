@@ -826,6 +826,11 @@ export function buildLayoutFromSchema(
  *
  * If an item from the source layout causes an error and returns null, it is
  * skipped without error, and the function will still return all non-null items.
+ * 
+ * 通过在现有布局中运行每个元素来创建新布局迭代器。递归地映射数组元素的项和选项卡。
+ * 用四个参数调用迭代器：（值、索引、布局、路径）返回的布局可能更长（或更短），然后是源布局。
+ * 如果源布局中的项返回多个项（通常为“*”），此功能将保持所有返回的项目与周围项目一致。
+ * 如果源布局中的项导致错误并返回NULL，则为*无错跳过，函数仍将返回所有非空项。
  *
  * @param  { any[] } layout - the layout to map
  * @param  { (v: any, i?: number, l?: any, p?: string) => any }

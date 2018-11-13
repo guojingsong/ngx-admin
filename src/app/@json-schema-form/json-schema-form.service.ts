@@ -31,14 +31,14 @@ export class JsonSchemaFormService {
   tpldata: any = {};
 
   ajvOptions: any = { allErrors: true, jsonPointers: true, unknownFormats: 'ignore' };
-  ajv: any = new Ajv(this.ajvOptions); // AJV: Another JSON Schema Validator
-  validateFormData: any = null; // Compiled AJV function to validate active form's schema
+  ajv: any = new Ajv(this.ajvOptions); // AJV: Another JSON模式验证程序
+  validateFormData: any = null; // 编译AJV函数验证活动表单的模式
 
-  formValues: any = {}; // Internal form data (may not have correct types)
-  data: any = {}; // Output form data (formValues, formatted with correct data types)
+  formValues: any = {}; // 内部表单数据（可能没有正确的类型）
+  data: any = {}; // 输出表单数据（表单值，用正确的数据类型格式化） Output form data (formValues, formatted with correct data types)
   schema: any = {}; // Internal JSON Schema
   layout: any[] = []; // Internal form layout
-  formGroupTemplate: any = {}; // Template used to create formGroup
+  formGroupTemplate: any = {}; // 用于创建窗体组的模板
   formGroup: any = null; // Angular formGroup, which powers the reactive form
   framework: any = null; // Active framework component
   formOptions: any; // Active options, used to configure the form
@@ -58,30 +58,30 @@ export class JsonSchemaFormService {
   dataRecursiveRefMap: Map<string, string> = new Map(); // Maps recursive reference points in form data
   schemaRecursiveRefMap: Map<string, string> = new Map(); // Maps recursive reference points in schema
   schemaRefLibrary: any = {}; // Library of schemas for resolving schema $refs
-  layoutRefLibrary: any = { '': null }; // Library of layout nodes for adding to form
-  templateRefLibrary: any = {}; // Library of formGroup templates for adding to form
-  hasRootReference = false; // Does the form include a recursive reference to itself?
+  layoutRefLibrary: any = { '': null }; // 用于添加到窗体的布局节点库
+  templateRefLibrary: any = {}; // 添加模板的模板组模板库
+  hasRootReference = false; // 表单是否包含对自身的递归引用？
 
   language = 'en-US'; // Does the form include a recursive reference to itself?
 
   // Default global form options
   defaultFormOptions: any = {
-    addSubmit: 'auto', // Add a submit button if layout does not have one?
+    addSubmit: 'auto', // 如果布局没有提交按钮，则添加提交按钮 
       // for addSubmit: true = always, false = never,
       // 'auto' = only if layout is undefined (form is built from schema alone)
     debug: false, // Show debugging output?
-    disableInvalidSubmit: true, // Disable submit if form invalid?
-    formDisabled: false, // Set entire form as disabled? (not editable, and disables outputs)
-    formReadonly: false, // Set entire form as read only? (not editable, but outputs still enabled)
-    fieldsRequired: false, // (set automatically) Are there any required fields in the form?
+    disableInvalidSubmit: true, // 禁用表单是否无效？ Disable submit if form invalid?
+    formDisabled: false, // 将整个窗体设置为禁用？（不可编辑，禁用输出） Set entire form as disabled? (not editable, and disables outputs)
+    formReadonly: false, // 将整个窗体设置为只读？（不可编辑，但输出仍然启用） Set entire form as read only? (not editable, but outputs still enabled)
+    fieldsRequired: false, // （自动设置）表单中是否有需要的字段？ (set automatically) Are there any required fields in the form?
     framework: 'no-framework', // The framework to load
-    loadExternalAssets: false, // Load external css and JavaScript for framework?
+    loadExternalAssets: false, // 为框架加载外部CSS和JavaScript？ Load external css and JavaScript for framework?
     pristine: { errors: true, success: true },
     supressPropertyTitles: false,
     setSchemaDefaults: 'auto', // Set fefault values from schema?
-      // true = always set (unless overridden by layout default or formValues)
+      // true = 始终设置（除非由布局默认值或窗体值重写）
       // false = never set
-      // 'auto' = set in addable components, and everywhere if formValues not set
+      // 'auto' = 设置可添加的组件，如果FALSE值未设置，则随处可见
     setLayoutDefaults: 'auto', // Set fefault values from layout?
       // true = always set (unless overridden by formValues)
       // false = never set
@@ -90,12 +90,12 @@ export class JsonSchemaFormService {
       // true = validate all fields immediately
       // false = only validate fields after they are touched by user
       // 'auto' = validate fields with values immediately, empty fields after they are touched
-    widgets: {}, // Any custom widgets to load
-    defautWidgetOptions: { // Default options for form control widgets
-      listItems: 1, // Number of list items to initially add to arrays with no default value
-      addable: true, // Allow adding items to an array or $ref point?
-      orderable: true, // Allow reordering items within an array?
-      removable: true, // Allow removing items from an array or $ref point?
+    widgets: {}, // 加载任何自定义小部件 Any custom widgets to load
+    defautWidgetOptions: { // 窗体控件小部件的默认选项
+      listItems: 1, // 最初添加到没有默认值的数组的列表项数
+      addable: true, // 允许将项目添加到数组 or $ref point?
+      orderable: true, // 允许在数组内重新排序项目 ?
+      removable: true, // 允许从数组中移除项 Allow removing items from an array or $ref point?
       enableErrorState: true, // Apply 'has-error' class when field fails validation?
       // disableErrorState: false, // Don't apply 'has-error' class when field fails validation?
       enableSuccessState: true, // Apply 'has-success' class when field validates?
@@ -116,10 +116,8 @@ export class JsonSchemaFormService {
 
   setLanguage(language: string = 'en-US') {
     this.language = language;
-    const validationMessages = language.slice(0, 2) === 'fr' ?
-      frValidationMessages : enValidationMessages;
-    this.defaultFormOptions.defautWidgetOptions.validationMessages =
-      _.cloneDeep(validationMessages);
+    const validationMessages = language.slice(0, 2) === 'fr' ?  frValidationMessages : enValidationMessages;
+    this.defaultFormOptions.defautWidgetOptions.validationMessages =  _.cloneDeep(validationMessages);
   }
 
   getData() { return this.data; }

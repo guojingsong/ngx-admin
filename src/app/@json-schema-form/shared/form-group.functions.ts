@@ -69,13 +69,11 @@ export function buildFormGroupTemplate(
   // TODO: If nodeValue still not set, check layout for default value
   const schemaType: string | string[] = JsonPointer.get(schema, '/type');
   let controlType =
-    (hasOwn(schema, 'properties') || hasOwn(schema, 'additionalProperties')) &&
-      schemaType === 'object' ? 'FormGroup' :
-    (hasOwn(schema, 'items') || hasOwn(schema, 'additionalItems')) &&
-      schemaType === 'array' ? 'FormArray' :
-    !schemaType && hasOwn(schema, '$ref') ? '$ref' : 'FormControl';
-  const shortDataPointer =
-    removeRecursiveReferences(dataPointer, jsf.dataRecursiveRefMap, jsf.arrayMap);
+    (hasOwn(schema, 'properties') || hasOwn(schema, 'additionalProperties')) &&  schemaType === 'object' ? 'FormGroup' :
+    (hasOwn(schema, 'items') || hasOwn(schema, 'additionalItems')) &&  schemaType === 'array' ? 'FormArray' : 
+     !schemaType && hasOwn(schema, '$ref') ? '$ref' : 'FormControl';
+  
+     const shortDataPointer =  removeRecursiveReferences(dataPointer, jsf.dataRecursiveRefMap, jsf.arrayMap);
   if (!jsf.dataMap.has(shortDataPointer)) {
     jsf.dataMap.set(shortDataPointer, new Map());
   }
@@ -465,6 +463,9 @@ export function formatFormData(
  *
  * If the optional third parameter 'returnGroup' is set to TRUE, the group
  * containing the control is returned, rather than the control itself.
+ * 使用数据对象的JSON指针检索控件角度窗体组或窗体组模板。
+ * （注：虽然是一个形式组模板要简单得多，它的基本结构是对形式群的标识。
+ *  如果可选的第三参数“返回组”设置为true，则该组返回包含控件的控件，而不是控件本身。
  *
  * @param {FormGroup} formGroup - Angular FormGroup to get value from
  * @param {Pointer} dataPointer - JSON Pointer (string or array)
@@ -478,6 +479,8 @@ export function getControl(
     if (!JsonPointer.isJsonPointer(dataPointer)) {
       // If dataPointer input is not a valid JSON pointer, check to
       // see if it is instead a valid object path, using dot notaion
+      // 如果数据包输入不是有效的JSON指针，请检查
+      // 使用DoT NoToIon查看它是否是一个有效的对象路径
       if (typeof dataPointer === 'string') {
         const formControl = formGroup.get(dataPointer);
         if (formControl) { return formControl; }
@@ -504,6 +507,7 @@ export function getControl(
   // If formGroup input is a formGroup template,
   // or formGroup.get() failed to return the control,
   // search the formGroup object for dataPointer's control
+  // 如果Frm组输入是一个Frand组模板，或FrimeGo.GET（）未能返回控件，查找数据组控件的Frand组对象
   let subGroup = formGroup;
   for (let key of dataPointerArray) {
     if (hasOwn(subGroup, 'controls')) { subGroup = subGroup.controls; }

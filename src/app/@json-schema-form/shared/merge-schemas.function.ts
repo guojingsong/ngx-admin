@@ -18,6 +18,11 @@ import { JsonPointer, Pointer } from './jsonpointer.functions';
  *
  * If unable to logically merge, returns an allOf schema object containing
  * an array of the original schemas;
+ * 
+ * 将多个JSON架构合并为具有组合规则的单个架构。如果能够逻辑地从所有模式合并属性，
+ * 返回包含所有合并属性的单个架构对象。
+ * 示例：（{a:b，max：1 }，{c:d，max：2 }）＝{a:b，c:d，max：1 }
+ * 如果无法逻辑合并，则返回包含ALOF架构对象原始模式的数组；
  *
  * Example: ({ a: b }, { a: d }) => { allOf: [ { a: b }, { a: d } ] }
  *

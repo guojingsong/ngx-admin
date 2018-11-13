@@ -29,19 +29,18 @@ import { JsonSchemaFormService } from '../../json-schema-form.service';
         [style.align-items]="getFlexAttribute('align-items')"
         [style.align-content]="getFlexAttribute('align-content')"
         [fxLayout]="options?.fxLayout"
-
         [fxLayoutGap]="options?.fxLayoutGap"
         [fxLayoutAlign]="options?.fxLayoutAlign"
         [attr.fxFlexFill]="options?.fxLayoutAlign"></flex-layout-root-widget>
       <mat-error *ngIf="options?.showErrors && options?.errorMessage"
         [innerHTML]="options?.errorMessage"></mat-error>
     </div>
-
     <fieldset *ngIf="containerType === 'fieldset'"
       [class]="options?.htmlClass || ''"
       [class.expandable]="options?.expandable && !expanded"
       [class.expanded]="options?.expandable && expanded"
       [disabled]="options?.readonly">
+      <nb-card>
       <legend *ngIf="sectionTitle"
         [class]="'legend ' + (options?.labelHtmlClass || '')"
         [innerHTML]="sectionTitle"
@@ -60,12 +59,12 @@ import { JsonSchemaFormService } from '../../json-schema-form.service';
         [style.align-items]="getFlexAttribute('align-items')"
         [style.align-content]="getFlexAttribute('align-content')"
         [fxLayout]="options?.fxLayout"
-
         [fxLayoutGap]="options?.fxLayoutGap"
         [fxLayoutAlign]="options?.fxLayoutAlign"
         [attr.fxFlexFill]="options?.fxLayoutAlign"></flex-layout-root-widget>
       <mat-error *ngIf="options?.showErrors && options?.errorMessage"
         [innerHTML]="options?.errorMessage"></mat-error>
+      </nb-card>
     </fieldset>
 
     <mat-card *ngIf="containerType === 'card'"
@@ -105,7 +104,6 @@ import { JsonSchemaFormService } from '../../json-schema-form.service';
           [innerHTML]="options?.errorMessage"></mat-error>
       </mat-card-footer>
     </mat-card>
-
     <mat-expansion-panel *ngIf="containerType === 'expansion-panel'"
       [expanded]="expanded"
       [hideToggle]="!options?.expandable">
@@ -139,7 +137,8 @@ import { JsonSchemaFormService } from '../../json-schema-form.service';
       </fieldset>
       <mat-error *ngIf="options?.showErrors && options?.errorMessage"
         [innerHTML]="options?.errorMessage"></mat-error>
-    </mat-expansion-panel>`,
+    </mat-expansion-panel>
+    `,
   styles: [`
     fieldset { border: 0; margin: 0; padding: 0; }
     .legend { font-weight: bold; }

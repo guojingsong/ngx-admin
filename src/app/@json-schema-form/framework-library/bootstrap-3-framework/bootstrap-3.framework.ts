@@ -13,13 +13,12 @@ export class Bootstrap3Framework extends Framework {
   framework = Bootstrap3FrameworkComponent;
 
   stylesheets = [
-    '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
-    '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css',
+    "//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.min.css"
   ];
 
   scripts = [
-    '//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js',
-    '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
-    '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
+//    '//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js',
+//    '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
+//    '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
   ];
 }
