@@ -11,12 +11,39 @@ export class DictionaryComponent implements OnInit {
 
   ngOnInit() {
   }
-  //selectedFramework = 'nebular-design';
-  //noFramework = 'no-framework';  
-  //selectedFramework = 'bootstrap-4';
-  //materialDesignFramework = 'material-design';  
+  nebularDesignFramework = 'nebular-design';
+  materialDesignFramework = 'material-design';  
+  selectedFramework3 = 'bootstrap-3';
+  selectedFramework4 = 'bootstrap-4'; 
+  noFramework = 'noFramework'; 
 
-  selectedFramework = 'bootstrap-3';
+  settings = {
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+    },
+    edit: {
+      editButtonContent: '<i class="nb-edit"></i>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+    },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
+    columns: {
+      id: {
+        title: '項目ID',
+        type: 'string',
+      },
+      firstName: {
+        title: '項目名称',
+        type: 'string',
+      }
+    }
+  };
+ 
   exampleSchema =
     {
       "title": "項目辞書",
@@ -264,7 +291,7 @@ export class DictionaryComponent implements OnInit {
         "field": {
           "title": "関連項目",
           "type": "array",
-          "format": "table",
+          "format": "array",
           "uniqueItems": false,
           "items": {
             "title": "関連項目",

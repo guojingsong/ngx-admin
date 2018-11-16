@@ -24,6 +24,7 @@ import { TabComponent } from './tab.component';
 import { TabsComponent } from './tabs.component';
 import { TemplateComponent } from './template.component';
 import { TextareaComponent } from './textarea.component';
+import { TableComponent } from './table.component';
 
 @Injectable()
 export class WidgetLibraryService {
@@ -37,6 +38,7 @@ export class WidgetLibraryService {
     'select-framework': SelectFrameworkComponent, // Applies the selected framework to a specified widget
     'select-widget': SelectWidgetComponent, // Displays a specified widget
     '$ref': AddReferenceComponent, // Button to add a new array item or $ref element
+    'table': TableComponent, // Button to add a new array item or $ref element    
 
   // Free-form text HTML 'input' form control widgets <input type="...">
     'email': 'text',

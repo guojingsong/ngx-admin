@@ -9,7 +9,7 @@ import { buildTitleMap, isArray } from '../shared';
   template: `
     <div
       [class]="options?.htmlClass || ''">
-      <label *ngIf="options?.title"
+      <label style="width:100px" *ngIf="options?.title"
         [attr.for]="'control' + layoutNode?._id"
         [class]="options?.labelHtmlClass || ''"
         [style.display]="options?.notitle ? 'none' : ''"

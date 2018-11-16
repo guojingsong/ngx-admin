@@ -1,10 +1,94 @@
-<div class="row">
-    <div class="col-lg-12">
-      <nb-card>
-        <nb-card-body>
-            <ngx-json-schema-form [schema]="exampleSchema" [data]="exampleData" [layout]="exampleLayout" [framework]="selectedFramework" (onSubmit)="exampleOnSubmitFn($event)">
+<nb-tabset>
+  <nb-tab tabTitle="noFramework">
+    <div class="row">
+      <div class="col-lg-3">
+        <nb-card>
+          <nb-card-header>辞书一览</nb-card-header>
+          <nb-card-body>
+            <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+            </ng2-smart-table>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div class="col-lg-9">
+        <nb-card>
+          <nb-card-header>辞书详细（noFramework）</nb-card-header>
+          <nb-card-body>
+            <ngx-json-schema-form [schema]="exampleSchema" [data]="exampleData" [framework]="noFramework" (onSubmit)="exampleOnSubmitFn($event)">
             </ngx-json-schema-form>
-        </nb-card-body>
-      </nb-card>
+          </nb-card-body>
+        </nb-card>
+      </div>
     </div>
-</div>    
+  </nb-tab>
+  <nb-tab tabTitle="selectedFramework4">
+    <div class="row">
+      <div class="col-lg-3">
+        <nb-card>
+          <nb-card-header>辞书一览</nb-card-header>
+          <nb-card-body>
+            <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+            </ng2-smart-table>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div class="col-lg-9">
+        <nb-card>
+          <nb-card-header>辞书详细（bootstrap-4Framework）</nb-card-header>
+          <nb-card-body>
+            <ngx-json-schema-form [schema]="exampleSchema" [data]="exampleData" [framework]="selectedFramework4"
+              (onSubmit)="exampleOnSubmitFn($event)">
+            </ngx-json-schema-form>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </nb-tab>
+  <nb-tab tabTitle="nebularDesignFramework">
+
+    <div class="row">
+      <div class="col-lg-3">
+        <nb-card>
+          <nb-card-header>辞书一览</nb-card-header>
+          <nb-card-body>
+            <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+            </ng2-smart-table>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div class="col-lg-9">
+        <nb-card>
+          <nb-card-header>辞书详细（nebularFramework）</nb-card-header>
+          <nb-card-body>
+            <ngx-json-schema-form [schema]="exampleSchema" [data]="exampleData" [framework]="nebularDesignFramework"
+              (onSubmit)="exampleOnSubmitFn($event)">
+            </ngx-json-schema-form>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </nb-tab>
+  <nb-tab tabTitle="materialDesignFramework">
+    <div class="row">
+      <div class="col-lg-3">
+        <nb-card>
+          <nb-card-header>辞书一览</nb-card-header>
+          <nb-card-body>
+            <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+            </ng2-smart-table>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div class="col-lg-9">
+        <nb-card>
+          <nb-card-header>辞书详细（materiaFramework）</nb-card-header>
+          <nb-card-body>
+            <ngx-json-schema-form [schema]="exampleSchema" [data]="exampleData" [framework]="materialDesignFramework"
+              (onSubmit)="exampleOnSubmitFn($event)">
+            </ngx-json-schema-form>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </nb-tab>
+</nb-tabset>

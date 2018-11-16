@@ -43,9 +43,9 @@ export class Ng2SmartTableComponent implements OnChanges {
     hideSubHeader: false,
     actions: {
       columnTitle: 'Actions',
-      add: true,
-      edit: true,
-      delete: true,
+      add: false,
+      edit: false,
+      delete: false,
       custom: [],
       position: 'left', // left|right
     },

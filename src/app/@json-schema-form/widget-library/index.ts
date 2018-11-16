@@ -20,6 +20,7 @@ import { TabComponent } from './tab.component';
 import { TabsComponent } from './tabs.component';
 import { TemplateComponent } from './template.component';
 import { TextareaComponent } from './textarea.component';
+import { TableComponent } from './table.component';
 
 export const BASIC_WIDGETS = [
   AddReferenceComponent, OneOfComponent, ButtonComponent, CheckboxComponent,
@@ -27,7 +28,7 @@ export const BASIC_WIDGETS = [
   MessageComponent, NoneComponent, NumberComponent, RadiosComponent,
   RootComponent, SectionComponent, SelectComponent, SelectFrameworkComponent,
   SelectWidgetComponent, SubmitComponent, TabComponent, TabsComponent,
-  TemplateComponent, TextareaComponent
+  TemplateComponent, TextareaComponent , TableComponent
 ];
 
 export { AddReferenceComponent } from './add-reference.component';
@@ -52,3 +53,4 @@ export { TabComponent } from './tab.component';
 export { TabsComponent } from './tabs.component';
 export { TemplateComponent } from './template.component';
 export { TextareaComponent } from './textarea.component';
+export { TableComponent } from './table.component';

@@ -69,9 +69,9 @@ export function buildLayout(jsf, widgetLibrary) {
           newNode.options.validationMessages = newNode.options.errorMessages;
           delete newNode.options.errorMessages;
 
-        // Convert Angular Schema Form (AngularJS) 'validationMessage' to
-        // Angular JSON Schema Form 'validationMessages'
-        // TV4 codes from https://github.com/geraintluff/tv4/blob/master/source/api.js
+          // Convert Angular Schema Form (AngularJS) 'validationMessage' to
+          // Angular JSON Schema Form 'validationMessages'
+          // TV4 codes from https://github.com/geraintluff/tv4/blob/master/source/api.js
         } else if (hasOwn(newNode.options, 'validationMessage')) {
           if (typeof newNode.options.validationMessage === 'string') {
             newNode.options.validationMessages = newNode.options.validationMessage;
@@ -80,25 +80,25 @@ export function buildLayout(jsf, widgetLibrary) {
             Object.keys(newNode.options.validationMessage).forEach(key => {
               const code = key + '';
               const newKey =
-                code ===  '0'  ? 'type' :
-                code ===  '1'  ? 'enum' :
-                code === '100' ? 'multipleOf' :
-                code === '101' ? 'minimum' :
-                code === '102' ? 'exclusiveMinimum' :
-                code === '103' ? 'maximum' :
-                code === '104' ? 'exclusiveMaximum' :
-                code === '200' ? 'minLength' :
-                code === '201' ? 'maxLength' :
-                code === '202' ? 'pattern' :
-                code === '300' ? 'minProperties' :
-                code === '301' ? 'maxProperties' :
-                code === '302' ? 'required' :
-                code === '304' ? 'dependencies' :
-                code === '400' ? 'minItems' :
-                code === '401' ? 'maxItems' :
-                code === '402' ? 'uniqueItems' :
-                code === '500' ? 'format' : code + '';
-              newNode.options.validationMessages[newKey] = newNode.options.validationMessage[key];
+              code ===  '0'  ? 'type' :
+              code ===  '1'  ? 'enum' :
+              code === '100' ? 'multipleOf' :
+              code === '101' ? 'minimum' :
+              code === '102' ? 'exclusiveMinimum' :
+              code === '103' ? 'maximum' :
+              code === '104' ? 'exclusiveMaximum' :
+              code === '200' ? 'minLength' :
+              code === '201' ? 'maxLength' :
+              code === '202' ? 'pattern' :
+              code === '300' ? 'minProperties' :
+              code === '301' ? 'maxProperties' :
+              code === '302' ? 'required' :
+              code === '304' ? 'dependencies' :
+              code === '400' ? 'minItems' :
+              code === '401' ? 'maxItems' :
+              code === '402' ? 'uniqueItems' :
+              code === '500' ? 'format' : code + '';
+            newNode.options.validationMessages[newKey] = newNode.options.validationMessage[key];
             });
           }
           delete newNode.options.validationMessage;
@@ -124,7 +124,7 @@ export function buildLayout(jsf, widgetLibrary) {
           JsonPointer.compile(JsonPointer.parseObjectPath(newNode.key), '-');
         delete newNode.key;
 
-      // If newNode is an array, search for dataPointer in child nodes
+        // If newNode is an array, search for dataPointer in child nodes
       } else if (hasOwn(newNode, 'type') && newNode.type.slice(-5) === 'array') {
         const findDataPointer = (items) => {
           if (items === null || typeof items !== 'object') { return; }
@@ -335,7 +335,7 @@ export function buildLayout(jsf, widgetLibrary) {
         if (isArray(newNode.items)) {
           const arrayListItems =
             newNode.items.filter(item => item.type !== '$ref').length -
-              newNode.options.tupleItems;
+            newNode.options.tupleItems;
           if (arrayListItems > newNode.options.listItems) {
             newNode.options.listItems = arrayListItems;
             nodeDataMap.set('listItems', arrayListItems);
@@ -392,7 +392,7 @@ export function buildLayout(jsf, widgetLibrary) {
               buttonText = fixTitle(newNode.name);
             }
 
-          // If newNode doesn't have a title, look for title of parent array item
+            // If newNode doesn't have a title, look for title of parent array item
           } else {
             const parentSchema =
               getFromSchema(jsf.schema, newNode.dataPointer, 'parentSchema');
@@ -588,171 +588,339 @@ export function buildLayoutFromSchema(
     // if (isObject(schema.additionalProperties)) { }
 
   } else if (newNode.dataType === 'array') {
-    newNode.items = [];
-    let templateArray: any[] = [];
-    newNode.options.maxItems = Math.min(
-      schema.maxItems || 1000, newNode.options.maxItems || 1000
-    );
-    newNode.options.minItems = Math.max(
-      schema.minItems || 0, newNode.options.minItems || 0
-    );
-    if (!newNode.options.minItems && isInputRequired(jsf.schema, schemaPointer)) {
-      newNode.options.minItems = 1;
-    }
-    if (!hasOwn(newNode.options, 'listItems')) { newNode.options.listItems = 1; }
-    newNode.options.tupleItems = isArray(schema.items) ? schema.items.length : 0;
-    if (newNode.options.maxItems <= newNode.options.tupleItems) {
-      newNode.options.tupleItems = newNode.options.maxItems;
-      newNode.options.listItems = 0;
-    } else if (newNode.options.maxItems <
-      newNode.options.tupleItems + newNode.options.listItems
-    ) {
-      newNode.options.listItems = newNode.options.maxItems - newNode.options.tupleItems;
-    } else if (newNode.options.minItems >
-      newNode.options.tupleItems + newNode.options.listItems
-    ) {
-      newNode.options.listItems = newNode.options.minItems - newNode.options.tupleItems;
-    }
-    if (!nodeDataMap.has('maxItems')) {
-      nodeDataMap.set('maxItems', newNode.options.maxItems);
-      nodeDataMap.set('minItems', newNode.options.minItems);
-      nodeDataMap.set('tupleItems', newNode.options.tupleItems);
-      nodeDataMap.set('listItems', newNode.options.listItems);
-    }
-    if (!jsf.arrayMap.has(shortDataPointer)) {
-      jsf.arrayMap.set(shortDataPointer, newNode.options.tupleItems)
-    }
-    removable = newNode.options.removable !== false;
-    let additionalItemsSchemaPointer: string = null;
-
-    // If 'items' is an array = tuple items
-    if (isArray(schema.items)) {
+    if (newNode.options.format === 'table') {
       newNode.items = [];
-      for (let i = 0; i < newNode.options.tupleItems; i++) {
-        let newItem: any;
-        const itemRefPointer = removeRecursiveReferences(
-          shortDataPointer + '/' + i, jsf.dataRecursiveRefMap, jsf.arrayMap
-        );
-        const itemRecursive = !itemRefPointer.length ||
-          itemRefPointer !== shortDataPointer + '/' + i;
+      let templateArray: any[] = [];
+      newNode.options.maxItems = Math.min(
+        schema.maxItems || 1000, newNode.options.maxItems || 1000
+      );
+      newNode.options.minItems = Math.max(
+        schema.minItems || 0, newNode.options.minItems || 0
+      );
+      if (!newNode.options.minItems && isInputRequired(jsf.schema, schemaPointer)) {
+        newNode.options.minItems = 1;
+      }
+      if (!hasOwn(newNode.options, 'listItems')) { newNode.options.listItems = 1; }
+      newNode.options.tupleItems = isArray(schema.items) ? schema.items.length : 0;
+      if (newNode.options.maxItems <= newNode.options.tupleItems) {
+        newNode.options.tupleItems = newNode.options.maxItems;
+        newNode.options.listItems = 0;
+      } else if (newNode.options.maxItems <
+        newNode.options.tupleItems + newNode.options.listItems
+      ) {
+        newNode.options.listItems = newNode.options.maxItems - newNode.options.tupleItems;
+      } else if (newNode.options.minItems >
+        newNode.options.tupleItems + newNode.options.listItems
+      ) {
+        newNode.options.listItems = newNode.options.minItems - newNode.options.tupleItems;
+      }
+      if (!nodeDataMap.has('maxItems')) {
+        nodeDataMap.set('maxItems', newNode.options.maxItems);
+        nodeDataMap.set('minItems', newNode.options.minItems);
+        nodeDataMap.set('tupleItems', newNode.options.tupleItems);
+        nodeDataMap.set('listItems', newNode.options.listItems);
+      }
+      if (!jsf.arrayMap.has(shortDataPointer)) {
+        jsf.arrayMap.set(shortDataPointer, newNode.options.tupleItems)
+      }
+      removable = newNode.options.removable !== false;
+      let additionalItemsSchemaPointer: string = null;
 
-        // If removable, add tuple item layout to layoutRefLibrary
-        if (removable && i >= newNode.options.minItems) {
-          if (!hasOwn(jsf.layoutRefLibrary, itemRefPointer)) {
-            // Set to null first to prevent recursive reference from causing endless loop
-            jsf.layoutRefLibrary[itemRefPointer] = null;
-            jsf.layoutRefLibrary[itemRefPointer] = buildLayoutFromSchema(
+      // If 'items' is an array = tuple items
+      if (isArray(schema.items)) {
+        newNode.items = [];
+        for (let i = 0; i < newNode.options.tupleItems; i++) {
+          let newItem: any;
+          const itemRefPointer = removeRecursiveReferences(
+            shortDataPointer + '/' + i, jsf.dataRecursiveRefMap, jsf.arrayMap
+          );
+          const itemRecursive = !itemRefPointer.length ||
+            itemRefPointer !== shortDataPointer + '/' + i;
+
+          // If removable, add tuple item layout to layoutRefLibrary
+          if (removable && i >= newNode.options.minItems) {
+            if (!hasOwn(jsf.layoutRefLibrary, itemRefPointer)) {
+              // Set to null first to prevent recursive reference from causing endless loop
+              jsf.layoutRefLibrary[itemRefPointer] = null;
+              jsf.layoutRefLibrary[itemRefPointer] = buildLayoutFromSchema(
+                jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null,
+                schemaPointer + '/items/' + i,
+                itemRecursive ? '' : dataPointer + '/' + i,
+                true, 'tuple', true, true, itemRecursive ? dataPointer + '/' + i : ''
+              );
+              if (itemRecursive) {
+                jsf.layoutRefLibrary[itemRefPointer].recursiveReference = true;
+              }
+            }
+            newItem = getLayoutNode({
+              $ref: itemRefPointer,
+              dataPointer: dataPointer + '/' + i,
+              recursiveReference: itemRecursive,
+            }, jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null);
+          } else {
+            newItem = buildLayoutFromSchema(
               jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null,
               schemaPointer + '/items/' + i,
-              itemRecursive ? '' : dataPointer + '/' + i,
-              true, 'tuple', true, true, itemRecursive ? dataPointer + '/' + i : ''
+              dataPointer + '/' + i,
+              true, 'tuple', false, forRefLibrary, dataPointerPrefix
             );
-            if (itemRecursive) {
-              jsf.layoutRefLibrary[itemRefPointer].recursiveReference = true;
+          }
+          if (newItem) { newNode.items.push(newItem); }
+        }
+
+        // If 'additionalItems' is an object = additional list items, after tuple items
+        if (isObject(schema.additionalItems)) {
+          additionalItemsSchemaPointer = schemaPointer + '/additionalItems';
+        }
+
+        // If 'items' is an object = list items only (no tuple items)
+      } else if (isObject(schema.items)) {
+        additionalItemsSchemaPointer = schemaPointer + '/items';
+      }
+
+      if (additionalItemsSchemaPointer) {
+        const itemRefPointer = removeRecursiveReferences(
+          shortDataPointer + '/-', jsf.dataRecursiveRefMap, jsf.arrayMap
+        );
+        const itemRecursive = !itemRefPointer.length ||
+          itemRefPointer !== shortDataPointer + '/-';
+        const itemSchemaPointer = removeRecursiveReferences(
+          additionalItemsSchemaPointer, jsf.schemaRecursiveRefMap, jsf.arrayMap
+        );
+
+        /*
+        // Add list item layout to layoutRefLibrary
+        if (itemRefPointer.length && !hasOwn(jsf.layoutRefLibrary, itemRefPointer)) {
+          // Set to null first to prevent recursive reference from causing endless loop
+          jsf.layoutRefLibrary[itemRefPointer] = null;
+          jsf.layoutRefLibrary[itemRefPointer] = buildLayoutFromSchema(
+            jsf, widgetLibrary, null,
+            itemSchemaPointer,
+            itemRecursive ? '' : dataPointer + '/-',
+            true, 'list', removable, true, itemRecursive ? dataPointer + '/-' : ''
+          );
+          if (itemRecursive) {
+            jsf.layoutRefLibrary[itemRefPointer].recursiveReference = true;
+          }
+        }
+
+        // Add any additional default items
+        if (!itemRecursive || newNode.options.required) {
+          const arrayLength = Math.min(Math.max(
+            itemRecursive ? 0 :
+              newNode.options.tupleItems + newNode.options.listItems,
+            isArray(nodeValue) ? nodeValue.length : 0
+          ), newNode.options.maxItems);
+          if (newNode.items.length < arrayLength) {
+            for (let i = newNode.items.length; i < arrayLength; i++) {
+              newNode.items.push(getLayoutNode({
+                $ref: itemRefPointer,
+                dataPointer: dataPointer + '/-',
+                recursiveReference: itemRecursive,
+              }, jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null));
             }
           }
-          newItem = getLayoutNode({
-            $ref: itemRefPointer,
-            dataPointer: dataPointer + '/' + i,
+        }
+        */
+        // If needed, add button to add items to array
+        if (newNode.options.addable !== false &&
+          newNode.options.minItems < newNode.options.maxItems &&
+          (newNode.items[newNode.items.length - 1] || {}).type !== '$ref'
+        ) {
+          let buttonText =
+            ((jsf.layoutRefLibrary[itemRefPointer] || {}).options || {}).title;
+          const prefix = buttonText ? 'Add ' : 'Add to ';
+          if (!buttonText) {
+            buttonText = schema.title || fixTitle(JsonPointer.toKey(dataPointer));
+          }
+          if (!/^add\b/i.test(buttonText)) { buttonText = prefix + buttonText; }
+          newNode.items.push({
+            _id: _.uniqueId(),
+            arrayItem: true,
+            arrayItemType: 'list',
+            dataPointer: newNode.dataPointer + '/-',
+            options: {
+              listItems: newNode.options.listItems,
+              maxItems: newNode.options.maxItems,
+              minItems: newNode.options.minItems,
+              removable: false,
+              title: 'my_Title',
+              tupleItems: newNode.options.tupleItems,
+            },
             recursiveReference: itemRecursive,
-          }, jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null);
-        } else {
-          newItem = buildLayoutFromSchema(
-            jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null,
-            schemaPointer + '/items/' + i,
-            dataPointer + '/' + i,
-            true, 'tuple', false, forRefLibrary, dataPointerPrefix
+            type: '$ref',
+            widget: widgetLibrary.getWidget('table'),
+            $ref: itemRefPointer,
+          });
+        }
+
+      }
+    } else {
+      newNode.items = [];
+      let templateArray: any[] = [];
+      newNode.options.maxItems = Math.min(
+        schema.maxItems || 1000, newNode.options.maxItems || 1000
+      );
+      newNode.options.minItems = Math.max(
+        schema.minItems || 0, newNode.options.minItems || 0
+      );
+      if (!newNode.options.minItems && isInputRequired(jsf.schema, schemaPointer)) {
+        newNode.options.minItems = 1;
+      }
+      if (!hasOwn(newNode.options, 'listItems')) { newNode.options.listItems = 1; }
+      newNode.options.tupleItems = isArray(schema.items) ? schema.items.length : 0;
+      if (newNode.options.maxItems <= newNode.options.tupleItems) {
+        newNode.options.tupleItems = newNode.options.maxItems;
+        newNode.options.listItems = 0;
+      } else if (newNode.options.maxItems <
+        newNode.options.tupleItems + newNode.options.listItems
+      ) {
+        newNode.options.listItems = newNode.options.maxItems - newNode.options.tupleItems;
+      } else if (newNode.options.minItems >
+        newNode.options.tupleItems + newNode.options.listItems
+      ) {
+        newNode.options.listItems = newNode.options.minItems - newNode.options.tupleItems;
+      }
+      if (!nodeDataMap.has('maxItems')) {
+        nodeDataMap.set('maxItems', newNode.options.maxItems);
+        nodeDataMap.set('minItems', newNode.options.minItems);
+        nodeDataMap.set('tupleItems', newNode.options.tupleItems);
+        nodeDataMap.set('listItems', newNode.options.listItems);
+      }
+      if (!jsf.arrayMap.has(shortDataPointer)) {
+        jsf.arrayMap.set(shortDataPointer, newNode.options.tupleItems)
+      }
+      removable = newNode.options.removable !== false;
+      let additionalItemsSchemaPointer: string = null;
+
+      // If 'items' is an array = tuple items
+      if (isArray(schema.items)) {
+        newNode.items = [];
+        for (let i = 0; i < newNode.options.tupleItems; i++) {
+          let newItem: any;
+          const itemRefPointer = removeRecursiveReferences(
+            shortDataPointer + '/' + i, jsf.dataRecursiveRefMap, jsf.arrayMap
           );
-        }
-        if (newItem) { newNode.items.push(newItem); }
-      }
+          const itemRecursive = !itemRefPointer.length ||
+            itemRefPointer !== shortDataPointer + '/' + i;
 
-      // If 'additionalItems' is an object = additional list items, after tuple items
-      if (isObject(schema.additionalItems)) {
-        additionalItemsSchemaPointer = schemaPointer + '/additionalItems';
-      }
-
-    // If 'items' is an object = list items only (no tuple items)
-    } else if (isObject(schema.items)) {
-      additionalItemsSchemaPointer = schemaPointer + '/items';
-    }
-
-    if (additionalItemsSchemaPointer) {
-      const itemRefPointer = removeRecursiveReferences(
-        shortDataPointer + '/-', jsf.dataRecursiveRefMap, jsf.arrayMap
-      );
-      const itemRecursive = !itemRefPointer.length ||
-        itemRefPointer !== shortDataPointer + '/-';
-      const itemSchemaPointer = removeRecursiveReferences(
-        additionalItemsSchemaPointer, jsf.schemaRecursiveRefMap, jsf.arrayMap
-      );
-      // Add list item layout to layoutRefLibrary
-      if (itemRefPointer.length && !hasOwn(jsf.layoutRefLibrary, itemRefPointer)) {
-        // Set to null first to prevent recursive reference from causing endless loop
-        jsf.layoutRefLibrary[itemRefPointer] = null;
-        jsf.layoutRefLibrary[itemRefPointer] = buildLayoutFromSchema(
-          jsf, widgetLibrary, null,
-          itemSchemaPointer,
-          itemRecursive ? '' : dataPointer + '/-',
-          true, 'list', removable, true, itemRecursive ? dataPointer + '/-' : ''
-        );
-        if (itemRecursive) {
-          jsf.layoutRefLibrary[itemRefPointer].recursiveReference = true;
-        }
-      }
-
-      // Add any additional default items
-      if (!itemRecursive || newNode.options.required) {
-        const arrayLength = Math.min(Math.max(
-          itemRecursive ? 0 :
-            newNode.options.tupleItems + newNode.options.listItems,
-          isArray(nodeValue) ? nodeValue.length : 0
-        ), newNode.options.maxItems);
-        if (newNode.items.length < arrayLength) {
-          for (let i = newNode.items.length; i < arrayLength; i++) {
-            newNode.items.push(getLayoutNode({
+          // If removable, add tuple item layout to layoutRefLibrary
+          if (removable && i >= newNode.options.minItems) {
+            if (!hasOwn(jsf.layoutRefLibrary, itemRefPointer)) {
+              // Set to null first to prevent recursive reference from causing endless loop
+              jsf.layoutRefLibrary[itemRefPointer] = null;
+              jsf.layoutRefLibrary[itemRefPointer] = buildLayoutFromSchema(
+                jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null,
+                schemaPointer + '/items/' + i,
+                itemRecursive ? '' : dataPointer + '/' + i,
+                true, 'tuple', true, true, itemRecursive ? dataPointer + '/' + i : ''
+              );
+              if (itemRecursive) {
+                jsf.layoutRefLibrary[itemRefPointer].recursiveReference = true;
+              }
+            }
+            newItem = getLayoutNode({
               $ref: itemRefPointer,
-              dataPointer: dataPointer + '/-',
+              dataPointer: dataPointer + '/' + i,
               recursiveReference: itemRecursive,
-            }, jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null));
+            }, jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null);
+          } else {
+            newItem = buildLayoutFromSchema(
+              jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null,
+              schemaPointer + '/items/' + i,
+              dataPointer + '/' + i,
+              true, 'tuple', false, forRefLibrary, dataPointerPrefix
+            );
+          }
+          if (newItem) { newNode.items.push(newItem); }
+        }
+
+        // If 'additionalItems' is an object = additional list items, after tuple items
+        if (isObject(schema.additionalItems)) {
+          additionalItemsSchemaPointer = schemaPointer + '/additionalItems';
+        }
+
+        // If 'items' is an object = list items only (no tuple items)
+      } else if (isObject(schema.items)) {
+        additionalItemsSchemaPointer = schemaPointer + '/items';
+      }
+
+      if (additionalItemsSchemaPointer) {
+        const itemRefPointer = removeRecursiveReferences(
+          shortDataPointer + '/-', jsf.dataRecursiveRefMap, jsf.arrayMap
+        );
+        const itemRecursive = !itemRefPointer.length ||
+          itemRefPointer !== shortDataPointer + '/-';
+        const itemSchemaPointer = removeRecursiveReferences(
+          additionalItemsSchemaPointer, jsf.schemaRecursiveRefMap, jsf.arrayMap
+        );
+        // Add list item layout to layoutRefLibrary
+        if (itemRefPointer.length && !hasOwn(jsf.layoutRefLibrary, itemRefPointer)) {
+          // Set to null first to prevent recursive reference from causing endless loop
+          jsf.layoutRefLibrary[itemRefPointer] = null;
+          jsf.layoutRefLibrary[itemRefPointer] = buildLayoutFromSchema(
+            jsf, widgetLibrary, null,
+            itemSchemaPointer,
+            itemRecursive ? '' : dataPointer + '/-',
+            true, 'list', removable, true, itemRecursive ? dataPointer + '/-' : ''
+          );
+          if (itemRecursive) {
+            jsf.layoutRefLibrary[itemRefPointer].recursiveReference = true;
           }
         }
-      }
 
-      // If needed, add button to add items to array
-      if (newNode.options.addable !== false &&
-        newNode.options.minItems < newNode.options.maxItems &&
-        (newNode.items[newNode.items.length - 1] || {}).type !== '$ref'
-      ) {
-        let buttonText =
-          ((jsf.layoutRefLibrary[itemRefPointer] || {}).options || {}).title;
-        const prefix = buttonText ? 'Add ' : 'Add to ';
-        if (!buttonText) {
-          buttonText = schema.title || fixTitle(JsonPointer.toKey(dataPointer));
+        // Add any additional default items
+        if (!itemRecursive || newNode.options.required) {
+          const arrayLength = Math.min(Math.max(
+            itemRecursive ? 0 :
+              newNode.options.tupleItems + newNode.options.listItems,
+            isArray(nodeValue) ? nodeValue.length : 0
+          ), newNode.options.maxItems);
+          if (newNode.items.length < arrayLength) {
+            for (let i = newNode.items.length; i < arrayLength; i++) {
+              newNode.items.push(getLayoutNode({
+                $ref: itemRefPointer,
+                dataPointer: dataPointer + '/-',
+                recursiveReference: itemRecursive,
+              }, jsf, widgetLibrary, isArray(nodeValue) ? nodeValue[i] : null));
+            }
+          }
         }
-        if (!/^add\b/i.test(buttonText)) { buttonText = prefix + buttonText; }
-        newNode.items.push({
-          _id: _.uniqueId(),
-          arrayItem: true,
-          arrayItemType: 'list',
-          dataPointer: newNode.dataPointer + '/-',
-          options: {
-            listItems: newNode.options.listItems,
-            maxItems: newNode.options.maxItems,
-            minItems: newNode.options.minItems,
-            removable: false,
-            title: buttonText,
-            tupleItems: newNode.options.tupleItems,
-          },
-          recursiveReference: itemRecursive,
-          type: '$ref',
-          widget: widgetLibrary.getWidget('$ref'),
-          $ref: itemRefPointer,
-        });
+
+        // If needed, add button to add items to array
+        if (newNode.options.addable !== false &&
+          newNode.options.minItems < newNode.options.maxItems &&
+          (newNode.items[newNode.items.length - 1] || {}).type !== '$ref'
+        ) {
+          let buttonText =
+            ((jsf.layoutRefLibrary[itemRefPointer] || {}).options || {}).title;
+          const prefix = buttonText ? 'Add ' : 'Add to ';
+          if (!buttonText) {
+            buttonText = schema.title || fixTitle(JsonPointer.toKey(dataPointer));
+          }
+          if (!/^add\b/i.test(buttonText)) { buttonText = prefix + buttonText; }
+          newNode.items.push({
+            _id: _.uniqueId(),
+            arrayItem: true,
+            arrayItemType: 'list',
+            dataPointer: newNode.dataPointer + '/-',
+            options: {
+              listItems: newNode.options.listItems,
+              maxItems: newNode.options.maxItems,
+              minItems: newNode.options.minItems,
+              removable: false,
+              title: buttonText,
+              tupleItems: newNode.options.tupleItems,
+            },
+            recursiveReference: itemRecursive,
+            type: '$ref',
+            widget: widgetLibrary.getWidget('$ref'),
+            $ref: itemRefPointer,
+          });
+        }
       }
     }
-
-  } else if (newNode.dataType === '$ref') {
+   } else if (newNode.dataType === '$ref') {
     const schemaRef = JsonPointer.compile(schema.$ref);
     const dataRef = JsonPointer.toDataPointer(schemaRef, jsf.schema);
     let buttonText = '';
@@ -764,7 +932,7 @@ export function buildLayoutFromSchema(
       buttonText =
         (/^add\b/i.test(newNode.name) ? '' : 'Add ') + fixTitle(newNode.name);
 
-    // If newNode doesn't have a title, look for title of parent array item
+      // If newNode doesn't have a title, look for title of parent array item
     } else {
       const parentSchema =
         JsonPointer.get(jsf.schema, schemaPointer, 0, -1);
@@ -898,8 +1066,8 @@ export function getLayoutNode(
     });
     return newLayoutNode;
 
-  // Otherwise, return referenced layout
-} else {
+    // Otherwise, return referenced layout
+  } else {
     let newLayoutNode = jsf.layoutRefLibrary[refNode.$ref];
     // If value defined, build new node from schema (to set array lengths)
     if (isDefined(nodeValue)) {
@@ -990,11 +1158,11 @@ export function buildTitleMap(
     for (let i of Object.keys(enumList)) {
       let name = enumList[i];
       let value = enumList[i];
-      newTitleMap.push({ name, value});
+      newTitleMap.push({ name, value });
       if (value === undefined || value === null) { hasEmptyValue = true; }
     }
   } else { // If no titleMap and no enum list, return default map of boolean values
-    newTitleMap = [ { name: 'True', value: true }, { name: 'False', value: false } ];
+    newTitleMap = [{ name: 'True', value: true }, { name: 'False', value: false }];
   }
 
   // Does titleMap have groups?
@@ -1033,7 +1201,7 @@ export function buildTitleMap(
         return groupTitleMap;
       }, []);
 
-    // If flatList = false, combine items from matching groups
+      // If flatList = false, combine items from matching groups
     } else {
       newTitleMap = newTitleMap.reduce((groupTitleMap, title) => {
         if (hasOwn(title, 'group')) {

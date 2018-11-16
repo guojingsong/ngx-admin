@@ -6,8 +6,8 @@ import { JsonSchemaFormService } from '../json-schema-form.service';
 @Component({
   selector: 'input-widget',
   template: `
-    <div [class]="options?.htmlClass || ''">
-      <label *ngIf="options?.title"
+    <div  [class]="options?.htmlClass || ''">
+      <label style="width:100px" *ngIf="options?.title"
         [attr.for]="'control' + layoutNode?._id"
         [class]="options?.labelHtmlClass || ''"
         [style.display]="options?.notitle ? 'none' : ''"

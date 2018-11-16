@@ -69,11 +69,11 @@ export function buildFormGroupTemplate(
   // TODO: If nodeValue still not set, check layout for default value
   const schemaType: string | string[] = JsonPointer.get(schema, '/type');
   let controlType =
-    (hasOwn(schema, 'properties') || hasOwn(schema, 'additionalProperties')) &&  schemaType === 'object' ? 'FormGroup' :
-    (hasOwn(schema, 'items') || hasOwn(schema, 'additionalItems')) &&  schemaType === 'array' ? 'FormArray' : 
-     !schemaType && hasOwn(schema, '$ref') ? '$ref' : 'FormControl';
-  
-     const shortDataPointer =  removeRecursiveReferences(dataPointer, jsf.dataRecursiveRefMap, jsf.arrayMap);
+    (hasOwn(schema, 'properties') || hasOwn(schema, 'additionalProperties')) && schemaType === 'object' ? 'FormGroup' :
+      (hasOwn(schema, 'items') || hasOwn(schema, 'additionalItems')) && schemaType === 'array' ? 'FormArray' :
+        !schemaType && hasOwn(schema, '$ref') ? '$ref' : 'FormControl';
+
+  const shortDataPointer = removeRecursiveReferences(dataPointer, jsf.dataRecursiveRefMap, jsf.arrayMap);
   if (!jsf.dataMap.has(shortDataPointer)) {
     jsf.dataMap.set(shortDataPointer, new Map());
   }
@@ -166,8 +166,8 @@ export function buildFormGroupTemplate(
                   dataPointer + '/' + i,
                   templatePointer + '/controls/' + i
                 ) :
-              itemRecursive ?
-                null : _.cloneDeep(jsf.templateRefLibrary[itemRefPointer])
+                itemRecursive ?
+                  null : _.cloneDeep(jsf.templateRefLibrary[itemRefPointer])
             );
           }
         }
@@ -177,7 +177,7 @@ export function buildFormGroupTemplate(
           additionalItemsPointer = schemaPointer + '/additionalItems';
         }
 
-      // If 'items' is an object = list items only (no tuple items)
+        // If 'items' is an object = list items only (no tuple items)
       } else {
         additionalItemsPointer = schemaPointer + '/items';
       }
@@ -310,7 +310,7 @@ export function mergeValues(...valuesToMerge) {
         (isEmpty(mergedValues) || typeof mergedValues !== 'object')
       ) {
         if (isArray(currentValue)) {
-          mergedValues = [ ...currentValue ];
+          mergedValues = [...currentValue];
         } else if (isObject(currentValue)) {
           mergedValues = { ...currentValue };
         }
@@ -413,8 +413,8 @@ export function formatFormData(
             JsonPointer.set(formattedData, dataPointer, newValue);
           }
 
-        // If returnEmptyFields === false,
-        // only add empty arrays and objects to required keys
+          // If returnEmptyFields === false,
+          // only add empty arrays and objects to required keys
         } else if (schemaType === 'object' && !returnEmptyFields) {
           (dataMap.get(genericPointer).get('required') || []).forEach(key => {
             const keySchemaType =
@@ -432,10 +432,10 @@ export function formatFormData(
           // "2000-03-14T01:59:26.535" -> "2000-03-14T01:59:26.535Z" (add "Z")
           if (/^\d\d\d\d-[0-1]\d-[0-3]\d[t\s][0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?$/i.test(value)) {
             JsonPointer.set(formattedData, dataPointer, `${value}Z`);
-          // "2000-03-14T01:59" -> "2000-03-14T01:59:00Z" (add ":00Z")
+            // "2000-03-14T01:59" -> "2000-03-14T01:59:00Z" (add ":00Z")
           } else if (/^\d\d\d\d-[0-1]\d-[0-3]\d[t\s][0-2]\d:[0-5]\d$/i.test(value)) {
             JsonPointer.set(formattedData, dataPointer, `${value}:00Z`);
-          // "2000-03-14" -> "2000-03-14T00:00:00Z" (add "T00:00:00Z")
+            // "2000-03-14" -> "2000-03-14T00:00:00Z" (add "T00:00:00Z")
           } else if (fixErrors && /^\d\d\d\d-[0-1]\d-[0-3]\d$/i.test(value)) {
             JsonPointer.set(formattedData, dataPointer, `${value}:00:00:00Z`);
           }
