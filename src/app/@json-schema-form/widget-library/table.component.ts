@@ -43,18 +43,6 @@ export class TableComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      firstName: {
-        title: 'First Name',
-        type: 'string',
-      },
-      lastName: {
-        title: 'Last Name',
-        type: 'string',
-      },
     },
   };
 
@@ -70,5 +58,12 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
     this.options = this.layoutNode.options || {};
+    this.layoutNode.items.forEach(element => {
+      this.settings.columns[element.name] =  {
+          title: element.name,
+          type: 'string',
+      }
+    });
+    
   }
 }

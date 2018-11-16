@@ -496,7 +496,7 @@ export function buildLayoutFromSchema(
   if (!hasOwn(schema, 'type') && !hasOwn(schema, '$ref') &&
     !hasOwn(schema, 'x-schema-form')
   ) { return null; }
-  const newNodeType: string = getInputType(schema);
+  const newNodeType: string = getInputType(schema, null , arrayItemType);
   if (!isDefined(nodeValue) && (
     jsf.formOptions.setSchemaDefaults === true ||
     (jsf.formOptions.setSchemaDefaults === 'auto' && isEmpty(jsf.formValues))
@@ -687,8 +687,6 @@ export function buildLayoutFromSchema(
         const itemSchemaPointer = removeRecursiveReferences(
           additionalItemsSchemaPointer, jsf.schemaRecursiveRefMap, jsf.arrayMap
         );
-
-        /*
         // Add list item layout to layoutRefLibrary
         if (itemRefPointer.length && !hasOwn(jsf.layoutRefLibrary, itemRefPointer)) {
           // Set to null first to prevent recursive reference from causing endless loop
@@ -697,7 +695,7 @@ export function buildLayoutFromSchema(
             jsf, widgetLibrary, null,
             itemSchemaPointer,
             itemRecursive ? '' : dataPointer + '/-',
-            true, 'list', removable, true, itemRecursive ? dataPointer + '/-' : ''
+            true, 'table', removable, true, itemRecursive ? dataPointer + '/-' : ''
           );
           if (itemRecursive) {
             jsf.layoutRefLibrary[itemRefPointer].recursiveReference = true;
@@ -721,7 +719,7 @@ export function buildLayoutFromSchema(
             }
           }
         }
-        */
+
         // If needed, add button to add items to array
         if (newNode.options.addable !== false &&
           newNode.options.minItems < newNode.options.maxItems &&
@@ -737,7 +735,7 @@ export function buildLayoutFromSchema(
           newNode.items.push({
             _id: _.uniqueId(),
             arrayItem: true,
-            arrayItemType: 'list',
+            arrayItemType: 'table',
             dataPointer: newNode.dataPointer + '/-',
             options: {
               listItems: newNode.options.listItems,
@@ -749,7 +747,7 @@ export function buildLayoutFromSchema(
             },
             recursiveReference: itemRecursive,
             type: '$ref',
-            widget: widgetLibrary.getWidget('table'),
+            widget: widgetLibrary.getWidget('$ref'),
             $ref: itemRefPointer,
           });
         }

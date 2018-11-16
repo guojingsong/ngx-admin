@@ -257,7 +257,7 @@ export function removeRecursiveReferences(
  * @param  { any = null } layoutNode
  * @return { string }
  */
-export function getInputType(schema, layoutNode: any = null) {
+export function getInputType(schema, layoutNode: any = null ,itemType: any = null) {
   // x-schema-form = Angular Schema Form compatibility
   // widget & component = React Jsonschema Form compatibility
   let controlType = JsonPointer.getFirst([
@@ -283,7 +283,11 @@ export function getInputType(schema, layoutNode: any = null) {
     if (schemaType === 'boolean') { return 'checkbox'; }
     if (schemaType === 'object') {
       if (hasOwn(schema, 'properties') || hasOwn(schema, 'additionalProperties')) {
-        return 'section';
+        if (itemType === 'table'){
+          return 'table';
+        }else{
+          return 'section';
+        }
       }
       // TODO: Figure out how to handle additionalProperties
       if (hasOwn(schema, '$ref')) { return '$ref'; }
